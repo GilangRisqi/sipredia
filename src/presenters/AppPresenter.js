@@ -13,6 +13,7 @@ import { PredictionModel } from '@models/PredictionModel.js';
 import '@views/components/Navbar.js';
 import '@views/components/Footer.js';
 import { DashboardView }   from '@views/pages/DashboardView.js';
+import '@views/pages/AboutView.js';
 
 // Non-custom element views
 import { LoginView }       from '@views/LoginView.js';
@@ -188,19 +189,8 @@ export class AppPresenter {
   }
 
   #showAboutPage() {
-    this.#setPage(`
-      <section class="placeholder-page container">
-        <h1 style="margin-bottom: var(--space-4);">ℹ️ Tentang SIPREDIA</h1>
-        <p class="text-secondary" style="max-width: 650px; margin: 0 auto var(--space-6); text-align: justify; line-height: 1.8;">
-          <strong>SIPREDIA (Sistem Prediksi Diabetes)</strong> merupakan aplikasi Clinical Decision Support System (CDSS) berbasis web yang dirancang khusus untuk mempermudah tenaga medis/dokter di Puskesmas dalam melakukan skrining awal risiko diabetes mellitus tipe 2 secara dini.
-        </p>
-        <p class="text-secondary" style="max-width: 650px; margin: 0 auto var(--space-6); text-align: justify; line-height: 1.8;">
-          Aplikasi ini memproses 6 parameter klinis penting pasien (usia, IMT, kadar glukosa, tekanan darah, kadar insulin, dan ketebalan kulit) menggunakan model klasifikasi Machine Learning untuk menghasilkan tingkat probabilitas risiko diabetes (Rendah, Sedang, atau Tinggi) beserta rekomendasi rujukan/tindakan preventif medis.
-        </p>
-        <button class="btn btn-primary" id="btn-about-back">Kembali ke Beranda</button>
-      </section>
-    `);
-    document.getElementById('btn-about-back')?.addEventListener('click', () => this.#navigate('/'));
+    const view = document.createElement('about-view');
+    this.#setPage(view);
   }
 
   #showNotFound() {

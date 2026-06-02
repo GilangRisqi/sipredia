@@ -53,28 +53,6 @@ export class DashboardView extends HTMLElement {
                 </button>
               </div>
             </div>
-            
-            <div class="hero-visual">
-              <div class="hero-card-preview card">
-                <div class="preview-header">
-                  <span class="preview-pulse"></span>
-                  <span class="preview-title">Sistem Penunjang Keputusan</span>
-                </div>
-                <div class="preview-body">
-                  <div class="preview-item">
-                    <span class="preview-label">Akurasi Model ML</span>
-                    <strong class="text-accent">94.2%</strong>
-                  </div>
-                  <div class="preview-progress">
-                    <div class="preview-progress-bar" style="width: 94.2%"></div>
-                  </div>
-                  <div class="preview-badge-row">
-                    <span class="badge badge-success">Offline Ready</span>
-                    <span class="badge badge-info">PIMA Dataset</span>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
