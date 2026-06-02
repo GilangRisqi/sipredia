@@ -39,34 +39,47 @@ export class PredictionModel {
   }
 
   /**
-   * Simulate a prediction result (development / offline mode).
-   * Returns after a 2-second artificial delay.
-   * @param {object} params
-   * @returns {Promise<object>}
+   * Calculate prediction risk locally (development / offline mode).
+   * @param {object} patientData
+   * @returns {Promise<string>}
    */
-  async simulatePredict(params) {
+  async calculateRisk(patientData) {
+    // Simulasi loading 2 detik
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    const riskScore = this.#calculateDummyRisk(params);
-    return {
-      riskLevel:      riskScore > 0.65 ? 'Tinggi' : riskScore > 0.35 ? 'Sedang' : 'Rendah',
-      probability:    parseFloat((riskScore * 100).toFixed(1)),
-      recommendation: riskScore > 0.65
-        ? 'Segera konsultasikan kondisi Anda dengan dokter spesialis.'
-        : riskScore > 0.35
-        ? 'Pantau pola makan dan aktifitas fisik secara rutin.'
-        : 'Pertahankan gaya hidup sehat Anda.',
-    };
+    // Convert age to category internally (Model responsibility)
+    const ageCategory = this.#convertAgeCategory(patientData.patientAge);
+    
+    // Algoritma statis/acak berdasarkan permintaan pengguna:
+    const isHighRisk = Math.random() > 0.5;
+    
+    if (isHighRisk) {
+      return "Berisiko diabetes";
+    } else {
+      return "Tidak berisiko diabetes";
+    }
   }
 
   // ── Private ──────────────────────────────────────────────────────────────
 
-  #calculateDummyRisk({ age, bmi, glucoseLevel, bloodPressure }) {
-    let score = 0;
-    if (age > 45) score += 0.2;
-    if (bmi > 30) score += 0.25;
-    if (glucoseLevel > 140) score += 0.35;
-    if (bloodPressure > 90) score += 0.2;
-    return Math.min(score + Math.random() * 0.1, 1);
+  /**
+   * Mengonversi Umur Asli menjadi Kategori Umur
+   * 1 = 18–24, 2 = 25–29, 3 = 30–34, 4 = 35–39, 5 = 40–44, 6 = 45–49, 
+   * 7 = 50–54, 8 = 55–59, 9 = 60–64, 10 = 65–69, 11 = 70–74, 12 = 75–79, 13 = 80+.
+   */
+  #convertAgeCategory(patientAge) {
+    if (patientAge >= 80) return 13;
+    if (patientAge >= 75) return 12;
+    if (patientAge >= 70) return 11;
+    if (patientAge >= 65) return 10;
+    if (patientAge >= 60) return 9;
+    if (patientAge >= 55) return 8;
+    if (patientAge >= 50) return 7;
+    if (patientAge >= 45) return 6;
+    if (patientAge >= 40) return 5;
+    if (patientAge >= 35) return 4;
+    if (patientAge >= 30) return 3;
+    if (patientAge >= 25) return 2;
+    return 1; // 18-24
   }
 }

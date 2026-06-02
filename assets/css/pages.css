@@ -193,7 +193,7 @@
 .shell-footer__clinic {
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
-  max-width: 600px;
+  max-width: 1000px;
   line-height: 1.6;
 }
 
@@ -285,7 +285,7 @@
 }
 
 /* ── Dashboard Page ───────────────────────────────────────────────────────── */
-.dashboard-page { padding-bottom: var(--space-16); }
+.dashboard-page { padding-bottom: var(--space-8); }
 
 /* Custom Hero Section with CSS Grid and Premium aesthetics */
 .dashboard-hero-wrapper {

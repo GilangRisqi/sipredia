@@ -15,9 +15,10 @@ import '@views/components/Footer.js';
 import { DashboardView }   from '@views/pages/DashboardView.js';
 import '@views/pages/AboutView.js';
 
+import '@views/pages/ScreeningView.js';
+
 // Non-custom element views
 import { LoginView }       from '@views/LoginView.js';
-import { ScreeningView }   from '@views/ScreeningView.js';
 
 export class AppPresenter {
   #router;
@@ -158,23 +159,22 @@ export class AppPresenter {
   }
 
   #showScreeningPage() {
-    const view = new ScreeningView();
-    this.#setPage(view.getTemplate());
-    view.onSubmit(async (params) => {
-      view.setLoading(true);
-      view.showPredicting();
+    const view = document.createElement('screening-view');
+    this.#setPage(view);
+
+    view.addEventListener('onPredict', async (event) => {
+      const patientData = event.detail;
+      view.showPredicting(); // Menampilkan status "Sedang memproses..."
+      
       try {
-        const result = await this.#prediction.simulatePredict(params);
+        const result = await this.#prediction.calculateRisk(patientData);
         view.showResult(result);
-        this.showToast('Prediksi selesai!', 'success');
+        this.showToast('Prediksi berhasil dikalkulasi.', 'success');
       } catch (err) {
-        view.showError(`Prediksi gagal: ${err.message}`);
+        view.showResult('Gagal memproses prediksi');
         this.showToast('Prediksi gagal.', 'danger');
-      } finally {
-        view.setLoading(false);
       }
     });
-    view.bindEvents();
   }
 
   #showHistoryPage() {
