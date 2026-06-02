@@ -57,47 +57,6 @@ export class DashboardView extends HTMLElement {
         </div>
 
         <div class="container">
-          <!-- Stats Bar -->
-          <div class="dashboard-stats">
-            <div class="stat-card card">
-              <span class="stat-card__label">Total Skrining Pasien</span>
-              <span class="stat-card__value" id="stat-total">${totalScreenings}</span>
-            </div>
-            <div class="stat-card card">
-              <span class="stat-card__label">Kategori Risiko Terakhir</span>
-              <span class="stat-card__value" id="stat-risk">
-                ${lastRisk !== '–' 
-                  ? `<span class="badge badge-${this.#riskBadgeColor(lastRisk)}">${lastRisk}</span>`
-                  : '<span class="text-muted">–</span>'}
-              </span>
-            </div>
-            <div class="stat-card card">
-              <span class="stat-card__label">Skrining Terakhir</span>
-              <span class="stat-card__value" id="stat-date">${lastDate}</span>
-            </div>
-          </div>
-
-          <!-- Quick Actions -->
-          <h2 class="dashboard-section-title">Aksi Cepat</h2>
-          <div class="quick-actions">
-            <button class="action-card card" data-route="/screening" aria-label="Mulai skrining baru">
-              <div class="action-card__icon">🔬</div>
-              <div class="action-card__body">
-                <h3 class="action-card__title">Input Skrining Baru</h3>
-                <p class="action-card__desc">Isi 6 parameter klinis pasien untuk menganalisis risiko diabetes saat ini.</p>
-              </div>
-              <span class="action-card__arrow">→</span>
-            </button>
-
-            <button class="action-card card" data-route="/history" aria-label="Lihat riwayat skrining">
-              <div class="action-card__icon">📋</div>
-              <div class="action-card__body">
-                <h3 class="action-card__title">Riwayat Skrining</h3>
-                <p class="action-card__desc">Lihat riwayat skrining pasien terdahulu dan pantau perkembangannya.</p>
-              </div>
-              <span class="action-card__arrow">→</span>
-            </button>
-          </div>
 
           <!-- Info Banner -->
           <div class="info-banner card">
