@@ -20,7 +20,7 @@ export class ScreeningView extends HTMLElement {
     this.innerHTML = `
       <section class="screening-page container" style="padding-top: var(--space-8); padding-bottom: var(--space-16);">
         <div class="screening-header" style="text-align: center; margin-bottom: var(--space-8);">
-          <h1 class="screening-header__title" style="font-size: var(--font-size-3xl); font-weight: 800; color: var(--color-text-primary); margin-bottom: var(--space-2);"><i class="bi bi-clipboard2-pulse-fill" style="margin-right: 0.5rem;"></i> Skrining Risiko Diabetes</h1>
+          <h1 class="screening-header__title" style="font-size: var(--font-size-3xl); font-weight: 800; color: var(--color-text-primary); margin-bottom: var(--space-2);"><i class="bi bi-clipboard2-pulse-fill" style="color: var(--color-accent); margin-right: 0.5rem;"></i> Skrining Risiko Diabetes</h1>
           <p class="screening-header__sub text-secondary">Isi 9 parameter klinis pasien di bawah ini secara akurat.</p>
         </div>
 

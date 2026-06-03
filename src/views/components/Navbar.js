@@ -50,6 +50,9 @@ export class AppNavbar extends HTMLElement {
           <a href="/" class="mobile-nav-menu__link" data-route="/">Home</a>
           <a href="/about" class="mobile-nav-menu__link" data-route="/about">Tentang</a>
           <a href="/screening" class="mobile-nav-menu__link" data-route="/screening">Prediksi</a>
+          <div class="mobile-user-actions" style="border-top: 1px solid var(--color-border); margin-top: var(--space-3); padding-top: var(--space-3); display: flex; flex-direction: column; gap: var(--space-2);">
+            <!-- Rendered dynamically via setUser() -->
+          </div>
         </nav>
       </header>
     `;
@@ -112,30 +115,39 @@ export class AppNavbar extends HTMLElement {
    * @param {object|null} user - The user object containing name or username
    */
   setUser(user) {
-    const container = this.querySelector('.shell-user');
-    if (!container) return;
+    const desktopContainer = this.querySelector('.shell-user');
+    const mobileContainer = this.querySelector('.mobile-user-actions');
+    
+    const renderUserDesktop = user ? `
+      <span class="shell-user__name">${this.#escapeHtml(user.name || user.username)}</span>
+      <button class="btn btn-secondary btn-sm" id="btn-logout-desktop" aria-label="Logout">Keluar</button>
+    ` : `
+      <a href="/login" class="btn btn-primary btn-sm" data-route="/login">Masuk</a>
+    `;
 
-    if (user) {
-      container.innerHTML = `
-        <span class="shell-user__name">${this.#escapeHtml(user.name || user.username)}</span>
-        <button class="btn btn-secondary btn-sm" id="btn-logout" aria-label="Logout">Keluar</button>
-      `;
+    const renderUserMobile = user ? `
+      <span class="shell-user__name" style="color: var(--color-text-secondary); margin-bottom: var(--space-2); font-weight: 500;">${this.#escapeHtml(user.name || user.username)}</span>
+      <button class="btn btn-secondary btn-sm" id="btn-logout-mobile" aria-label="Logout" style="width: 100%;">Keluar</button>
+    ` : `
+      <a href="/login" class="btn btn-primary btn-sm" data-route="/login" style="text-align: center;">Masuk</a>
+    `;
 
-      const btnLogout = container.querySelector('#btn-logout');
-      if (btnLogout) {
-        btnLogout.addEventListener('click', (e) => {
+    if (desktopContainer) desktopContainer.innerHTML = renderUserDesktop;
+    if (mobileContainer) mobileContainer.innerHTML = renderUserMobile;
+
+    // Attach logout event listeners
+    [this.querySelector('#btn-logout-desktop'), this.querySelector('#btn-logout-mobile')].forEach(btn => {
+      if (btn) {
+        btn.addEventListener('click', (e) => {
           e.preventDefault();
           this.dispatchEvent(new CustomEvent('logout', {
             bubbles: true,
             composed: true
           }));
+          this.closeMobileMenu();
         });
       }
-    } else {
-      container.innerHTML = `
-        <a href="/login" class="btn btn-primary btn-sm" data-route="/login">Masuk</a>
-      `;
-    }
+    });
   }
 
   /**
