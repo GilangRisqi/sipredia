@@ -19,6 +19,7 @@ import '@views/pages/ScreeningView.js';
 
 // Non-custom element views
 import { LoginView }       from '@views/LoginView.js';
+import { RegisterView }    from '@views/RegisterView.js';
 
 export class AppPresenter {
   #router;
@@ -70,6 +71,7 @@ export class AppPresenter {
   #registerRoutes() {
     this.#router.register('/',          'home');
     this.#router.register('/login',     'login');
+    this.#router.register('/register',  'register');
     this.#router.register('/dashboard', 'dashboard');
     this.#router.register('/screening', 'screening');
     this.#router.register('/history',   'history');
@@ -80,14 +82,14 @@ export class AppPresenter {
     const routeName = this.#router.resolve(path) ?? 'notFound';
 
     // Auth gate — redirect unauthenticated users to login (except public pages)
-    const publicRoutes = ['login', 'about', 'home', 'dashboard', 'screening', 'history'];
+    const publicRoutes = ['login', 'register', 'about', 'home', 'dashboard', 'screening', 'history'];
     if (!this.#auth.isAuthenticated() && !publicRoutes.includes(routeName)) {
       this.#router.replace('/login');
       return this.#showLoginPage();
     }
 
     // Redirect authenticated users away from login
-    if (this.#auth.isAuthenticated() && routeName === 'login') {
+    if (this.#auth.isAuthenticated() && (routeName === 'login' || routeName === 'register')) {
       this.#router.replace('/dashboard');
       return this.#showDashboardPage();
     }
@@ -103,6 +105,8 @@ export class AppPresenter {
         return this.#showDashboardPage();
       case 'login':
         return this.#showLoginPage();
+      case 'register':
+        return this.#showRegisterPage();
       case 'screening':
         return this.#showScreeningPage();
       case 'history':
@@ -139,6 +143,24 @@ export class AppPresenter {
       } catch (err) {
         view.setLoading(false);
         view.showError(err.message || 'Login gagal. Periksa kembali kredensial Anda.');
+      }
+    });
+    view.bindEvents();
+  }
+
+  #showRegisterPage() {
+    const view = new RegisterView();
+    this.#setPage(view.getTemplate());
+    view.onSubmit(async (userData) => {
+      view.clearErrors();
+      view.setLoading(true);
+      try {
+        await this.#auth.register(userData);
+        this.#navigate('/login');
+        this.showToast('Registrasi berhasil! Silakan masuk.', 'success');
+      } catch (err) {
+        view.setLoading(false);
+        view.showError(err.message || 'Pendaftaran gagal. Silakan coba lagi.');
       }
     });
     view.bindEvents();
@@ -249,7 +271,12 @@ export class AppPresenter {
   }
 
   #toastIcon(type) {
-    const icons = { success: '✅', warning: '⚠️', danger: '❌', info: 'ℹ️' };
+    const icons = { 
+      success: '<i class="bi bi-check-circle-fill"></i>', 
+      warning: '<i class="bi bi-exclamation-triangle-fill"></i>', 
+      danger: '<i class="bi bi-x-circle-fill"></i>', 
+      info: '<i class="bi bi-info-circle-fill"></i>' 
+    };
     return icons[type] || icons.info;
   }
 

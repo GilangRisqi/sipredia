@@ -34,6 +34,26 @@ export class AuthModel {
   }
 
   /**
+   * Attempt registration via API.
+   * @param {Object} userData - { nama, tglLahir, email, password }
+   * @returns {Promise<object>}
+   */
+  async register(userData) {
+    const response = await fetch(`${API_BASE}/api/auth/register/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userData),
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err.detail || `Registrasi gagal (${response.status})`);
+    }
+
+    return await response.json();
+  }
+
+  /**
    * Clear session from localStorage.
    */
   logout() {

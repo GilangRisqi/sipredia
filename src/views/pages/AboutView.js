@@ -27,7 +27,7 @@ export class AboutView extends HTMLElement {
         <!-- 1. Tujuan dan Manfaat -->
         <div class="card" style="margin-bottom: var(--space-6);">
           <h2 style="font-size: var(--font-size-xl); color: var(--color-accent); margin-bottom: var(--space-3); display: flex; align-items: center; gap: var(--space-2);">
-            <span>🎯</span> Tujuan dan Manfaat
+            <span><i class="bi bi-bullseye"></i></span> Tujuan dan Manfaat
           </h2>
           <p class="text-secondary" style="line-height: 1.8;">
             Aplikasi web ini bertujuan untuk mempercepat deteksi dini risiko diabetes bagi pasien di tingkat fasilitas kesehatan pertama (Puskesmas). Dengan adanya SIPREDIA, tenaga medis dapat dengan cepat mengklasifikasikan risiko pasien sebagai langkah awal sebelum melakukan rujukan atau pemeriksaan laboratorium lebih lanjut.
@@ -37,7 +37,7 @@ export class AboutView extends HTMLElement {
         <!-- 2. Cara Penggunaan PWA -->
         <div class="card" style="margin-bottom: var(--space-6);">
           <h2 style="font-size: var(--font-size-xl); color: var(--color-accent); margin-bottom: var(--space-3); display: flex; align-items: center; gap: var(--space-2);">
-            <span>📱</span> Cara Penggunaan PWA
+            <span><i class="bi bi-phone"></i></span> Cara Penggunaan PWA
           </h2>
           <p class="text-secondary" style="line-height: 1.8; margin-bottom: var(--space-3);">
             SIPREDIA dirancang sebagai <strong>Progressive Web App (PWA)</strong>. Artinya, aplikasi ini dapat diinstal di perangkat Anda (baik desktop maupun seluler) dan memiliki kemampuan untuk berjalan meskipun tanpa koneksi internet (offline).
@@ -53,7 +53,7 @@ export class AboutView extends HTMLElement {
         <!-- 3. Metodologi dan Parameter Prediksi -->
         <div class="card" style="margin-bottom: var(--space-6);">
           <h2 style="font-size: var(--font-size-xl); color: var(--color-accent); margin-bottom: var(--space-3); display: flex; align-items: center; gap: var(--space-2);">
-            <span>📊</span> Metodologi dan Parameter Prediksi
+            <span><i class="bi bi-bar-chart-fill"></i></span> Metodologi dan Parameter Prediksi
           </h2>
           <p class="text-secondary" style="margin-bottom: var(--space-4); line-height: 1.8;">
             Sistem ini menggunakan algoritma Machine Learning yang memproses 8 parameter klinis utama untuk menghasilkan prediksi risiko diabetes:
@@ -65,49 +65,58 @@ export class AboutView extends HTMLElement {
                 <tr style="border-bottom: 2px solid var(--color-border);">
                   <th style="padding: var(--space-3) var(--space-2); font-weight: 600;">No</th>
                   <th style="padding: var(--space-3) var(--space-2); font-weight: 600;">Parameter</th>
-                  <th style="padding: var(--space-3) var(--space-2); font-weight: 600;">Keterangan / Tipe Data</th>
+                  <th style="padding: var(--space-3) var(--space-2); font-weight: 600;">Keterangan</th>
+                  <th style="padding: var(--space-3) var(--space-2); font-weight: 600;">Tipe Data</th>
                 </tr>
               </thead>
               <tbody>
                 <tr style="border-bottom: 1px solid var(--color-border);">
                   <td style="padding: var(--space-3) var(--space-2);">1</td>
                   <td style="font-weight: 500; color: var(--color-text-primary);">Riwayat Darah Tinggi</td>
-                  <td>Ya / Tidak</td>
+                  <td style="padding: var(--space-3) var(--space-2);">Apakah pasien memiliki riwayat atau pernah didiagnosis menderita tekanan darah tinggi (hipertensi).</td>
+                  <td style="padding: var(--space-3) var(--space-2);">Ya / Tidak</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--color-border);">
                   <td style="padding: var(--space-3) var(--space-2);">2</td>
                   <td style="font-weight: 500; color: var(--color-text-primary);">Riwayat Kolesterol</td>
-                  <td>Ya / Tidak</td>
+                  <td style="padding: var(--space-3) var(--space-2);">Apakah pasien memiliki riwayat kadar kolesterol tinggi atau pernah didiagnosis hiperkolesterolemia.</td>
+                  <td style="padding: var(--space-3) var(--space-2);">Ya / Tidak</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--color-border);">
                   <td style="padding: var(--space-3) var(--space-2);">3</td>
                   <td style="font-weight: 500; color: var(--color-text-primary);">Riwayat Penyakit Jantung</td>
-                  <td>Ya / Tidak</td>
+                  <td style="padding: var(--space-3) var(--space-2);">Apakah pasien memiliki riwayat penyakit jantung, seperti penyakit jantung koroner, gagal jantung, atau gangguan jantung lainnya.</td>
+                  <td style="padding: var(--space-3) var(--space-2);">Ya / Tidak</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--color-border);">
                   <td style="padding: var(--space-3) var(--space-2);">4</td>
                   <td style="font-weight: 500; color: var(--color-text-primary);">BMI (Body Mass Index)</td>
-                  <td>Angka (Indeks massa tubuh)</td>
+                  <td style="padding: var(--space-3) var(--space-2);">Nilai indeks massa tubuh yang dihitung berdasarkan berat badan dan tinggi badan pasien untuk mengetahui status berat badan.</td>
+                  <td style="padding: var(--space-3) var(--space-2);">Angka</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--color-border);">
                   <td style="padding: var(--space-3) var(--space-2);">5</td>
                   <td style="font-weight: 500; color: var(--color-text-primary);">Tingkat Kesehatan</td>
-                  <td>Skala 1 - 5 (Berdasarkan keluhan)</td>
+                  <td style="padding: var(--space-3) var(--space-2);">Penilaian kondisi kesehatan pasien secara umum berdasarkan keluhan atau kondisi yang dirasakan.</td>
+                  <td style="padding: var(--space-3) var(--space-2);">Skala 1–5</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--color-border);">
                   <td style="padding: var(--space-3) var(--space-2);">6</td>
                   <td style="font-weight: 500; color: var(--color-text-primary);">Jumlah Hari Sakit</td>
-                  <td>1 - 30 hari (Dalam satu bulan)</td>
+                  <td style="padding: var(--space-3) var(--space-2);">Jumlah hari dalam satu bulan terakhir ketika pasien mengalami sakit atau gangguan kesehatan.</td>
+                  <td style="padding: var(--space-3) var(--space-2);">1–30 Hari</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--color-border);">
                   <td style="padding: var(--space-3) var(--space-2);">7</td>
                   <td style="font-weight: 500; color: var(--color-text-primary);">Jenis Kelamin</td>
-                  <td>Laki-laki / Perempuan</td>
+                  <td style="padding: var(--space-3) var(--space-2);">Jenis kelamin biologis pasien yang digunakan sebagai salah satu faktor dalam analisis.</td>
+                  <td style="padding: var(--space-3) var(--space-2);">Laki-laki / Perempuan</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--color-border);">
                   <td style="padding: var(--space-3) var(--space-2);">8</td>
                   <td style="font-weight: 500; color: var(--color-text-primary);">Umur</td>
-                  <td>Angka (Tahun)</td>
+                  <td style="padding: var(--space-3) var(--space-2);">Usia pasien pada saat data dimasukkan ke sistem.</td>
+                  <td style="padding: var(--space-3) var(--space-2);">Angka (Tahun)</td>
                 </tr>
               </tbody>
             </table>
@@ -117,7 +126,7 @@ export class AboutView extends HTMLElement {
         <!-- 4. Disclaimer Medis -->
         <div style="background-color: rgba(245, 158, 11, 0.08); border: 1px solid var(--color-warning); padding: var(--space-6); border-radius: var(--radius-lg);">
           <h3 style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-3); font-size: var(--font-size-lg); color: var(--color-warning);">
-            <span>⚠️</span> Pernyataan Penyangkalan (Disclaimer) Medis
+            <span><i class="bi bi-exclamation-triangle-fill"></i></span> Pernyataan Penyangkalan (Disclaimer) Medis
           </h3>
           <p style="line-height: 1.7; font-size: var(--font-size-sm); color: var(--color-text-primary);">
             <strong>PENTING:</strong> SIPREDIA murni beroperasi sebagai alat bantu pendukung keputusan (<em>decision support tool</em>) bagi tenaga medis. Hasil prediksi probabilitas risiko diabetes yang dikeluarkan oleh sistem ini <strong>TIDAK BOLEH</strong> dijadikan sebagai diagnosis medis mutlak. Keputusan klinis, penanganan pasien, dan diagnosis akhir tetap harus melalui prosedur pemeriksaan klinis langsung dan tes laboratorium standar oleh dokter yang berwenang.

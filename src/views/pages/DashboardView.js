@@ -49,7 +49,7 @@ export class DashboardView extends HTMLElement {
               <p class="hero-subtitle">Alat bantu dokter untuk deteksi dini risiko diabetes pasien secara cepat, akurat, dan berbasis kecerdasan buatan.</p>
               <div class="hero-actions">
                 <button class="btn btn-primary btn-cta" data-route="/screening" aria-label="Mulai melakukan prediksi diabetes">
-                  🩺 Mulai Prediksi Baru
+                  <i class="bi bi-stethoscope" style="margin-right: 0.5rem;"></i> Mulai Prediksi Baru
                 </button>
               </div>
             </div>
@@ -60,7 +60,7 @@ export class DashboardView extends HTMLElement {
 
           <!-- Info Banner -->
           <div class="info-banner card">
-            <span class="info-banner__icon">💡</span>
+            <span class="info-banner__icon"><i class="bi bi-lightbulb-fill"></i></span>
             <p class="info-banner__text">
               SIPREDIA menggunakan model pembelajaran mesin yang menganalisis parameter glukosa, indeks massa tubuh (IMT), tekanan darah, ketebalan kulit, insulin, dan usia untuk memperkirakan kemungkinan diabetes. Selalu gunakan pertimbangan klinis Anda sebelum mendiagnosis pasien.
             </p>
@@ -88,10 +88,10 @@ export class DashboardView extends HTMLElement {
 
   #getGreeting() {
     const hour = new Date().getHours();
-    if (hour < 11) return '🌅 Selamat pagi';
-    if (hour < 15) return '☀️ Selamat siang';
-    if (hour < 18) return '🌤 Selamat sore';
-    return '🌙 Selamat malam';
+    if (hour < 11) return '<i class="bi bi-sunrise"></i> Selamat pagi';
+    if (hour < 15) return '<i class="bi bi-brightness-high"></i> Selamat siang';
+    if (hour < 18) return '<i class="bi bi-cloud-sun"></i> Selamat sore';
+    return '<i class="bi bi-moon-stars"></i> Selamat malam';
   }
 
   #riskBadgeColor(risk) {

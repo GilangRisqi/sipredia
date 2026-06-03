@@ -7,6 +7,7 @@
 
 import '@assets/css/main.css';
 import '@assets/css/pages.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import { AppPresenter } from './presenters/AppPresenter.js';
 
 // ── Service Worker Registration ──────────────────────────────────────────────

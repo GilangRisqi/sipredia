@@ -1,13 +1,13 @@
 /**
- * LoginView
+ * RegisterView
  * Layer   : View
- * Purpose : Renders the login form and emits submit/input events.
- *           No authentication logic here.
+ * Purpose : Renders the register form and emits submit/input events.
+ *           No logic here.
  */
-export class LoginView {
+export class RegisterView {
   #onSubmit = null;
 
-  /** Return the HTML string for the login page. */
+  /** Return the HTML string for the register page. */
   getTemplate() {
     return `
       <section class="login-page">
@@ -15,25 +15,45 @@ export class LoginView {
           <!-- Branding -->
           <div class="login-card__brand">
             <div class="login-card__icon"><i class="bi bi-heart-pulse-fill"></i></div>
-            <h1 class="login-card__title">SIPREDIA</h1>
-            <p class="login-card__subtitle">Sistem Prediksi Diabetes</p>
+            <h1 class="login-card__title">Daftar Akun</h1>
+            <p class="login-card__subtitle">SIPREDIA</p>
           </div>
 
           <!-- Form -->
-          <form class="login-form" id="login-form" novalidate autocomplete="on">
+          <form class="login-form" id="register-form" novalidate autocomplete="off">
             <div class="form-group">
-              <label class="form-label" for="input-username">Username</label>
+              <label class="form-label" for="input-nama">Nama Lengkap</label>
               <input
                 class="form-input"
                 type="text"
-                id="input-username"
-                name="username"
-                placeholder="Masukkan username"
-                autocomplete="username"
+                id="input-nama"
+                name="nama"
+                placeholder="Masukkan nama lengkap"
                 required
-                aria-required="true"
               />
-              <span class="form-error" id="error-username" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="input-tgl-lahir">Tanggal Lahir</label>
+              <input
+                class="form-input"
+                type="date"
+                id="input-tgl-lahir"
+                name="tgl-lahir"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="input-email">Email</label>
+              <input
+                class="form-input"
+                type="email"
+                id="input-email"
+                name="email"
+                placeholder="Masukkan email"
+                required
+              />
             </div>
 
             <div class="form-group">
@@ -45,9 +65,7 @@ export class LoginView {
                   id="input-password"
                   name="password"
                   placeholder="Masukkan password"
-                  autocomplete="current-password"
                   required
-                  aria-required="true"
                 />
                 <button
                   type="button"
@@ -56,20 +74,19 @@ export class LoginView {
                   aria-label="Tampilkan/sembunyikan password"
                 ><i class="bi bi-eye"></i></button>
               </div>
-              <span class="form-error" id="error-password" aria-live="polite"></span>
             </div>
 
             <button
               type="submit"
               class="btn btn-primary btn-block"
-              id="btn-login-submit"
+              id="btn-register-submit"
             >
-              Masuk
+              Daftar
             </button>
 
             <div style="text-align: center; margin-top: var(--space-4);">
-              <span class="text-secondary">Belum punya akun ? </span>
-              <a href="#" id="link-register" style="color: var(--color-primary); text-decoration: none; font-weight: 500;">Daftar</a>
+              <span class="text-secondary">Sudah punya akun ? </span>
+              <a href="#" id="link-login" style="color: var(--color-primary); text-decoration: none; font-weight: 500;">Masuk</a>
             </div>
 
             <p class="login-form__global-error form-error" id="error-global" aria-live="assertive"></p>
@@ -81,13 +98,15 @@ export class LoginView {
 
   /** Bind DOM events after the template has been injected into the DOM. */
   bindEvents() {
-    const form = document.getElementById('login-form');
+    const form = document.getElementById('register-form');
     if (form && this.#onSubmit) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const username = document.getElementById('input-username')?.value.trim() ?? '';
+        const nama = document.getElementById('input-nama')?.value.trim() ?? '';
+        const tglLahir = document.getElementById('input-tgl-lahir')?.value ?? '';
+        const email = document.getElementById('input-email')?.value.trim() ?? '';
         const password = document.getElementById('input-password')?.value ?? '';
-        this.#onSubmit({ username, password });
+        this.#onSubmit({ nama, tglLahir, email, password });
       });
     }
 
@@ -102,13 +121,13 @@ export class LoginView {
       });
     }
 
-    // Navigasi ke halaman register
-    const linkRegister = document.getElementById('link-register');
-    if (linkRegister) {
-      linkRegister.addEventListener('click', (e) => {
+    // Navigasi ke halaman login
+    const linkLogin = document.getElementById('link-login');
+    if (linkLogin) {
+      linkLogin.addEventListener('click', (e) => {
         e.preventDefault();
         document.body.dispatchEvent(new CustomEvent('navigate', {
-          detail: { path: '/register' },
+          detail: { path: '/login' },
           bubbles: true,
           composed: true
         }));
@@ -118,10 +137,10 @@ export class LoginView {
 
   /** Show loading state on the submit button. */
   setLoading(isLoading) {
-    const btn = document.getElementById('btn-login-submit');
+    const btn = document.getElementById('btn-register-submit');
     if (!btn) return;
     btn.disabled    = isLoading;
-    btn.textContent = isLoading ? 'Memverifikasi...' : 'Masuk';
+    btn.textContent = isLoading ? 'Mendaftar...' : 'Daftar';
   }
 
   /** Display a global error message. */
@@ -132,10 +151,8 @@ export class LoginView {
 
   /** Clear all inline error messages. */
   clearErrors() {
-    ['error-username', 'error-password', 'error-global'].forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) el.textContent = '';
-    });
+    const el = document.getElementById('error-global');
+    if (el) el.textContent = '';
   }
 
   /** Register submit callback (Presenter attaches this). */

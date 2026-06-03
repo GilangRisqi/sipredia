@@ -21,7 +21,7 @@ export class AppNavbar extends HTMLElement {
       <header class="shell-header">
         <div class="container shell-header__inner">
           <a href="/" class="shell-logo" data-route="/">
-            <span class="shell-logo__icon">🩺</span>
+            <span class="shell-logo__icon"><i class="bi bi-heart-pulse-fill"></i></span>
             <span class="shell-logo__name">SIPREDIA</span>
           </a>
 
