@@ -97,7 +97,21 @@ export class AboutView extends HTMLElement {
                 <tr style="border-bottom: 1px solid var(--color-border);">
                   <td style="padding: var(--space-3) var(--space-2);">5</td>
                   <td style="font-weight: 500; color: var(--color-text-primary);">Tingkat Kesehatan</td>
-                  <td style="padding: var(--space-3) var(--space-2);">Penilaian kondisi kesehatan pasien secara umum berdasarkan keluhan atau kondisi yang dirasakan.</td>
+                  <td style="padding: var(--space-3) var(--space-2);">
+                    Penilaian kondisi kesehatan pasien berdasarkan tingkat keparahan keluhan, mulai dari 1 (Sangat Baik) hingga 5 (Buruk).
+                    <div style="margin-top: var(--space-2);">
+                      <button type="button" class="btn btn-secondary btn-sm" id="btn-toggle-scale" style="padding: var(--space-1) var(--space-2); font-size: 0.75rem;">Lihat Detail Skala <i class="bi bi-chevron-down" id="icon-toggle-scale"></i></button>
+                      <div id="scale-details" style="display: none; margin-top: var(--space-2); padding: var(--space-3); background: var(--color-bg-secondary); border-radius: var(--radius-sm); border: 1px solid var(--color-border); font-size: var(--font-size-sm);">
+                        <ul style="list-style-type: none; margin: 0; padding: 0;">
+                          <li style="margin-bottom: var(--space-2);"><strong>1 (Sangat Baik)</strong>: Pasien datang untuk kontrol rutin dan tidak memiliki keluhan kesehatan.</li>
+                          <li style="margin-bottom: var(--space-2);"><strong>2 (Baik)</strong>: Pasien datang untuk kontrol rutin, pemeriksaan laboratorium, meminta rujukan, atau pengambilan obat tanpa keluhan fisik yang spesifik.</li>
+                          <li style="margin-bottom: var(--space-2);"><strong>3 (Cukup Baik)</strong>: Pasien mengalami keluhan ringan seperti pegal ringan, batuk-pilek singkat, atau kondisi kronis yang masih stabil namun mulai menunjukkan gejala awal.</li>
+                          <li style="margin-bottom: var(--space-2);"><strong>4 (Kurang Baik)</strong>: Pasien mengalami keluhan yang cukup mengganggu aktivitas sehari-hari, seperti lemas berkepanjangan, mual muntah, pusing, luka diabetes ringan, nyeri sendi, kesemutan, atau kadar gula darah yang tinggi.</li>
+                          <li><strong>5 (Buruk)</strong>: Pasien mengalami kondisi serius atau gawat darurat yang memerlukan penanganan segera, seperti pasca stroke, amputasi, luka gangren, sesak napas berat, gangguan bicara, atau gangguan penglihatan berat.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
                   <td style="padding: var(--space-3) var(--space-2);">Skala 1–5</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--color-border);">
@@ -138,7 +152,17 @@ export class AboutView extends HTMLElement {
   }
 
   bindEvents() {
-    // Event binding khusus jika diperlukan di halaman ini
+    const btnToggle = this.querySelector('#btn-toggle-scale');
+    const scaleDetails = this.querySelector('#scale-details');
+    const iconToggle = this.querySelector('#icon-toggle-scale');
+
+    if (btnToggle && scaleDetails && iconToggle) {
+      btnToggle.addEventListener('click', () => {
+        const isHidden = scaleDetails.style.display === 'none';
+        scaleDetails.style.display = isHidden ? 'block' : 'none';
+        iconToggle.className = isHidden ? 'bi bi-chevron-up' : 'bi bi-chevron-down';
+      });
+    }
   }
 }
 
