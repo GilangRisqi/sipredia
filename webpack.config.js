@@ -19,7 +19,7 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'dist'),
     },
-    port: 3000,
+    port: 9090,
     hot: true,
     historyApiFallback: true,
     open: true,

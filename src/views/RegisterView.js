@@ -2,7 +2,7 @@
  * RegisterView
  * Layer   : View
  * Purpose : Renders the register form and emits submit/input events.
- *           No logic here.
+ * No logic here.
  */
 export class RegisterView {
   #onSubmit = null;
@@ -12,14 +12,12 @@ export class RegisterView {
     return `
       <section class="login-page">
         <div class="login-card card">
-          <!-- Branding -->
           <div class="login-card__brand">
             <div class="login-card__icon"><i class="bi bi-heart-pulse-fill"></i></div>
             <h1 class="login-card__title">Daftar Akun</h1>
             <p class="login-card__subtitle">SIPREDIA</p>
           </div>
 
-          <!-- Form -->
           <form class="login-form" id="register-form" novalidate autocomplete="off">
             <div class="form-group">
               <label class="form-label" for="input-nama">Nama Lengkap</label>
@@ -102,10 +100,14 @@ export class RegisterView {
     if (form && this.#onSubmit) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
+        
+        // Data yang diambil dari DOM: { nama, tglLahir, email, password }
         const nama = document.getElementById('input-nama')?.value.trim() ?? '';
         const tglLahir = document.getElementById('input-tgl-lahir')?.value ?? '';
         const email = document.getElementById('input-email')?.value.trim() ?? '';
         const password = document.getElementById('input-password')?.value ?? '';
+        
+        // Memanggil callback dari Presenter
         this.#onSubmit({ nama, tglLahir, email, password });
       });
     }

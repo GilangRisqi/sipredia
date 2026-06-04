@@ -129,19 +129,30 @@ export class AppPresenter {
     }
   }
 
-  #showLoginPage() {
+#showLoginPage() {
     const view = new LoginView();
     this.#setPage(view.getTemplate());
-    view.onSubmit(async ({ username, password }) => {
+
+    // UBAH: View kemungkinan melempar objek { email, password } atau { username, password }
+    // Kita pastikan menangkapnya dan mengirim ke AuthModel.login()
+    view.onSubmit(async (credentials) => {
       view.clearErrors();
       view.setLoading(true);
       try {
-        await this.#auth.login(username, password);
+        // Kita menggunakan "email" jika view memberikannya, atau fallback ke "username"
+        // Sesuaikan dengan nama variabel dari LoginView Anda.
+        const userEmail = credentials.email || credentials.username;
+        const password = credentials.password;
+
+        // Panggil AuthModel yang baru
+        await this.#auth.login(userEmail, password);
+        
         this.#navbar.setUser(this.#auth.getUser()); // Sync user to navbar
         this.#navigate('/dashboard');
         this.showToast('Berhasil masuk!', 'success');
       } catch (err) {
         view.setLoading(false);
+        // Tangkap pesan spesifik (seperti Invalid email/password dari BE)
         view.showError(err.message || 'Login gagal. Periksa kembali kredensial Anda.');
       }
     });
@@ -155,7 +166,10 @@ export class AppPresenter {
       view.clearErrors();
       view.setLoading(true);
       try {
+        // userData dari RegisterView harus berisi: { nama, tglLahir, email, password }
+        // AuthModel.register sudah menangani mapping namanya ke BE.
         await this.#auth.register(userData);
+        
         this.#navigate('/login');
         this.showToast('Registrasi berhasil! Silakan masuk.', 'success');
       } catch (err) {

@@ -2,7 +2,7 @@
  * LoginView
  * Layer   : View
  * Purpose : Renders the login form and emits submit/input events.
- *           No authentication logic here.
+ * No authentication logic here.
  */
 export class LoginView {
   #onSubmit = null;
@@ -12,28 +12,26 @@ export class LoginView {
     return `
       <section class="login-page">
         <div class="login-card card">
-          <!-- Branding -->
           <div class="login-card__brand">
             <div class="login-card__icon"><i class="bi bi-heart-pulse-fill"></i></div>
             <h1 class="login-card__title">SIPREDIA</h1>
-            <p class="login-card__subtitle">Sistem Prediksi Diabetes</p>
+            <p class="login-card__subtitle">Sistem Prediksi Risiko Kesehatan</p>
           </div>
 
-          <!-- Form -->
           <form class="login-form" id="login-form" novalidate autocomplete="on">
             <div class="form-group">
-              <label class="form-label" for="input-username">Username</label>
+              <label class="form-label" for="input-email">Email</label>
               <input
                 class="form-input"
-                type="text"
-                id="input-username"
-                name="username"
-                placeholder="Masukkan username"
-                autocomplete="username"
+                type="email"
+                id="input-email"
+                name="email"
+                placeholder="Masukkan email"
+                autocomplete="email"
                 required
                 aria-required="true"
               />
-              <span class="form-error" id="error-username" aria-live="polite"></span>
+              <span class="form-error" id="error-email" aria-live="polite"></span>
             </div>
 
             <div class="form-group">
@@ -85,9 +83,13 @@ export class LoginView {
     if (form && this.#onSubmit) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const username = document.getElementById('input-username')?.value.trim() ?? '';
+        
+        // Mengubah ID dan variabel penampung menjadi email
+        const email = document.getElementById('input-email')?.value.trim() ?? '';
         const password = document.getElementById('input-password')?.value ?? '';
-        this.#onSubmit({ username, password });
+        
+        // Mengirimkan objek { email, password } ke Presenter
+        this.#onSubmit({ email, password });
       });
     }
 
@@ -132,7 +134,8 @@ export class LoginView {
 
   /** Clear all inline error messages. */
   clearErrors() {
-    ['error-username', 'error-password', 'error-global'].forEach((id) => {
+    // Mengubah error-username menjadi error-email
+    ['error-email', 'error-password', 'error-global'].forEach((id) => {
       const el = document.getElementById(id);
       if (el) el.textContent = '';
     });

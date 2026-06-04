@@ -2,35 +2,48 @@
  * AuthModel
  * Layer   : Model
  * Purpose : Manages authentication state and token persistence in localStorage.
- *           No DOM access.
+ * No DOM access.
  */
 
 const TOKEN_KEY = 'sipredia_token';
 const USER_KEY  = 'sipredia_user';
-const API_BASE  = (typeof process !== 'undefined' && process.env && process.env.API_BASE_URL) || 'http://localhost:8000';
+
+const API_BASE = (typeof process !== 'undefined' && process.env && process.env.API_BASE_URL) || 'https://sipredia-backend.vercel.app';
 
 export class AuthModel {
   /**
    * Attempt login via API.
-   * @param {string} username
+   * @param {string} email - Diubah ke email sesuai Supabase
    * @param {string} password
-   * @returns {Promise<{token: string, user: object}>}
+   * @returns {Promise<object>}
    */
-  async login(username, password) {
-    const response = await fetch(`${API_BASE}/api/auth/login/`, {
+  async login(email, password) {
+    const response = await fetch(`${API_BASE}/api/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ email, password }),
     });
 
     if (!response.ok) {
       const err = await response.json().catch(() => ({}));
-      throw new Error(err.detail || `Login failed (${response.status})`);
+      // Mengambil pesan error spesifik dari BE Node.js (err.error)
+      throw new Error(err.error || `Login failed (${response.status})`);
     }
 
-    const data = await response.json();
-    this.#persistSession(data.token, data.user);
-    return data;
+    const result = await response.json();
+    
+    // Menyesuaikan dengan struktur response sukses dari BE Node.js yang kita buat
+    const token = result.data.session.access_token;
+    
+    // Menyimpan metadata user (termasuk nama dan tanggal_lahir yang di-fetch dari tabel profiles)
+    const user = {
+      id: result.data.user.id,
+      email: result.data.user.email,
+      ...result.data.user.user_metadata
+    };
+
+    this.#persistSession(token, user);
+    return result;
   }
 
   /**
@@ -39,15 +52,23 @@ export class AuthModel {
    * @returns {Promise<object>}
    */
   async register(userData) {
-    const response = await fetch(`${API_BASE}/api/auth/register/`, {
+    // Mapping tglLahir ke tanggal_lahir agar sesuai dengan body yang diminta BE
+    const payload = {
+      email: userData.email,
+      password: userData.password,
+      nama: userData.nama,
+      tanggal_lahir: userData.tglLahir 
+    };
+
+    const response = await fetch(`${API_BASE}/api/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userData),
+      body: JSON.stringify(payload),
     });
 
     if (!response.ok) {
       const err = await response.json().catch(() => ({}));
-      throw new Error(err.detail || `Registrasi gagal (${response.status})`);
+      throw new Error(err.error || `Registrasi gagal (${response.status})`);
     }
 
     return await response.json();
