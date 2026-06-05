@@ -137,7 +137,7 @@ export class RegisterView {
     }
   }
 
-  /** Show loading state on the submit button. */
+  /** loading state on the submit button. */
   setLoading(isLoading) {
     const btn = document.getElementById('btn-register-submit');
     if (!btn) return;
@@ -145,7 +145,7 @@ export class RegisterView {
     btn.textContent = isLoading ? 'Mendaftar...' : 'Daftar';
   }
 
-  /** Display a global error message. */
+  /** global error message. */
   showError(message) {
     const el = document.getElementById('error-global');
     if (el) el.textContent = message;

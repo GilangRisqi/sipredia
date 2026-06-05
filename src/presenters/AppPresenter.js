@@ -208,7 +208,7 @@ export class AppPresenter {
         this.showToast('Prediksi berhasil dikalkulasi.', 'success');
       } catch (err) {
         view.showResult('Gagal memproses prediksi');
-        this.showToast('Prediksi gagal.', 'danger');
+        this.showToast('Koneksi terputus. Pastikan server AI berjalan.', 'danger');
       }
     });
   }

@@ -43,20 +43,43 @@ export class PredictionModel {
    * @param {object} patientData
    * @returns {Promise<string>}
    */
-  async calculateRisk(patientData) {
-    // Simulasi loading 2 detik
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+async calculateRisk(patientData) {
+    //Hitung BMI berdasarkan tinggi dan berat badan
+    const heightM = patientData.height / 100;
+    const bmiValue = parseFloat((patientData.weight / (heightM * heightM)).toFixed(1));
 
-    // Convert age to category internally (Model responsibility)
-    const ageCategory = this.#convertAgeCategory(patientData.patientAge);
-    
-    // Algoritma statis/acak berdasarkan permintaan pengguna:
-    const isHighRisk = Math.random() > 0.5;
-    
-    if (isHighRisk) {
-      return "Berisiko diabetes";
-    } else {
-      return "Tidak berisiko diabetes";
+    // Translasi Data: Ubah teks dari View menjadi angka (0.0 / 1.0) untuk Python
+    const payload = {
+      riwayat_darah_tinggi: patientData.highBloodPressure === 'Ya' ? 1.0 : 0.0,
+      riwayat_kolesterol: patientData.highCholesterol === 'Ya' ? 1.0 : 0.0,
+      riwayat_jantung: patientData.heartDisease === 'Ya' ? 1.0 : 0.0,
+      kesehatan_berdasar_keluhan: parseFloat(patientData.generalHealth),
+      kesehatan_buruk_sebulan: parseFloat(patientData.sickDays),
+      bmi: bmiValue,
+      jenis_kelamin: patientData.sex === 'Pria' ? 1.0 : 0.0,
+      kategori_umur: parseFloat(this.#convertAgeCategory(patientData.patientAge))
+    };
+
+    // Lakukan pemanggilan (Fetch) ke backend Python Flask
+    try {
+      const response = await fetch('http://127.0.0.1:5000/prediksi', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      
+      if (!response.ok) throw new Error("Gagal menghubungi server");
+
+      const result = await response.json();
+      
+      if (result.hasil_prediksi === 1.0) {
+        return "Berisiko diabetes";
+      } else {
+        return "Tidak berisiko diabetes";
+      }
+    } catch (error) {
+      console.error("API Error:", error);
+      throw error;
     }
   }
 

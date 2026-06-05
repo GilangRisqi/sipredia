@@ -26,16 +26,16 @@ export class AuthModel {
 
     if (!response.ok) {
       const err = await response.json().catch(() => ({}));
-      // Mengambil pesan error spesifik dari BE Node.js (err.error)
+      // ngambil pesan error spesifik dari BE Node.js (err.error)
       throw new Error(err.error || `Login failed (${response.status})`);
     }
 
     const result = await response.json();
     
-    // Menyesuaikan dengan struktur response sukses dari BE Node.js yang kita buat
+    // sesuaikan dengan struktur response sukses dari BE Node.js yang kita buat
     const token = result.data.session.access_token;
     
-    // Menyimpan metadata user (termasuk nama dan tanggal_lahir yang di-fetch dari tabel profiles)
+    // simpan metadata user (termasuk nama dan tanggal_lahir yang di-fetch dari tabel profiles)
     const user = {
       id: result.data.user.id,
       email: result.data.user.email,
@@ -52,7 +52,7 @@ export class AuthModel {
    * @returns {Promise<object>}
    */
   async register(userData) {
-    // Mapping tglLahir ke tanggal_lahir agar sesuai dengan body yang diminta BE
+    // mapping tglLahir ke tanggal_lahir agar sesuai dengan body yang diminta BE
     const payload = {
       email: userData.email,
       password: userData.password,

@@ -209,9 +209,27 @@ export class ScreeningView extends HTMLElement {
     const container = this.querySelector('#result-container');
     if (container) {
       container.hidden = false;
-      const isRisk = resultString === 'Berisiko diabetes';
-      const badgeClass = isRisk ? 'badge-danger' : 'badge-success';
-      const icon = isRisk ? '<i class="bi bi-exclamation-triangle-fill" style="color: var(--color-danger);"></i>' : '<i class="bi bi-check-circle-fill" style="color: var(--color-success);"></i>';
+      
+      let badgeClass = '';
+      let icon = '';
+      // TAMBAHKAN VARIABEL INI
+      let pesanBawah = ''; 
+
+      if (resultString === 'Berisiko diabetes') {
+        badgeClass = 'badge-danger';
+        icon = '<i class="bi bi-exclamation-triangle-fill" style="color: var(--color-danger);"></i>';
+        pesanBawah = "<strong>Disclaimer:</strong> SIPREDIA adalah sistem pendukung keputusan. Keputusan klinis akhir tetap berada pada kewenangan dokter.";
+      } else if (resultString === 'Tidak berisiko diabetes') {
+        badgeClass = 'badge-success';
+        icon = '<i class="bi bi-check-circle-fill" style="color: var(--color-success);"></i>';
+        pesanBawah = "<strong>Disclaimer:</strong> Jaga pola makan dan gaya hidup sehat Anda. Lakukan pemeriksaan rutin di Puskesmas.";
+      } else {
+        // KONDISI ERROR (Server Mati)
+        badgeClass = 'badge-warning'; 
+        icon = '<i class="bi bi-x-circle-fill" style="color: var(--color-warning);"></i>';
+        // PESAN KHUSUS SAAT ERROR
+        pesanBawah = "<strong>Peringatan Sistem:</strong> Gagal terhubung ke Machine Learning. Pastikan server Python API telah dinyalakan dan koneksi internet stabil.";
+      }
 
       container.innerHTML = `
         <div class="card result-panel" style="margin-top: var(--space-6); text-align: center;">
@@ -223,7 +241,7 @@ export class ScreeningView extends HTMLElement {
             </span>
           </div>
           <p class="text-secondary" style="font-size: var(--font-size-sm);">
-            <strong>Disclaimer:</strong> SIPREDIA adalah sistem pendukung keputusan. Keputusan klinis akhir tetap berada pada kewenangan dokter bedasarkan hasil pemeriksaan laboratorium konvensional.
+            ${pesanBawah}
           </p>
         </div>
       `;
