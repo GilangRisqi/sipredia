@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { InjectManifest } = require('workbox-webpack-plugin');
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -58,12 +59,18 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         { from: 'public/manifest.json', to: 'manifest.json' },
-        { from: 'public/sw.js', to: 'sw.js' },
+        { from: 'public/icons', to: 'icons' },
+        ...(isDev ? [{ from: 'public/sw.js', to: 'sw.js' }] : []),
       ],
     }),
     ...(isDev
       ? []
       : [
+          new InjectManifest({
+            swSrc: './public/sw.js',
+            swDest: 'sw.js',
+            maximumFileSizeToCacheInBytes: 5000000, // 5MB limit
+          }),
           new MiniCssExtractPlugin({
             filename: 'assets/css/[name].[contenthash].css',
           }),

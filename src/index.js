@@ -10,16 +10,6 @@ import '@assets/css/pages.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { AppPresenter } from './presenters/AppPresenter.js';
 
-// ── Service Worker Registration ──────────────────────────────────────────────
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker
-      .register('/sw.js')
-      .then((reg) => console.log('[SW] Registered, scope:', reg.scope))
-      .catch((err) => console.error('[SW] Registration failed:', err));
-  });
-}
-
 // ── Boot Application ─────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
   const app = new AppPresenter();
@@ -33,4 +23,26 @@ window.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
   });
+
+
+  // ── Service Worker Registration & Update ─────────────────────────────────────
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+      .register('/sw.js')
+      .then((reg) => {
+        console.log('[SW] Registered, scope:', reg.scope);
+        
+        // Mendeteksi adanya pembaruan Service Worker
+        reg.addEventListener('updatefound', () => {
+          const newWorker = reg.installing;
+          newWorker.addEventListener('statechange', () => {
+            // Jika worker baru sudah terinstal dan ada worker lama yang masih mengontrol halaman
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              app.showUpdateAvailable();
+            }
+          });
+        });
+      })
+      .catch((err) => console.error('[SW] Registration failed:', err));
+  }
 });

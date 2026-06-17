@@ -62,7 +62,7 @@ export class DashboardView extends HTMLElement {
           <div class="info-banner card">
             <span class="info-banner__icon"><i class="bi bi-lightbulb-fill"></i></span>
             <p class="info-banner__text">
-              SIPREDIA menggunakan model pembelajaran mesin yang menganalisis parameter glukosa, indeks massa tubuh (IMT), tekanan darah, ketebalan kulit, insulin, dan usia untuk memperkirakan kemungkinan diabetes. Selalu gunakan pertimbangan klinis Anda sebelum mendiagnosis pasien.
+              SIPREDIA menggunakan model pembelajaran mesin yang menganalisis parameter Riwayat Tekanan Darah Tinggi, Riwayat Kolesterol, Riwayat Penyakit Jantung, Kesehatan Berdasarkan Keluhan, Kesehatan Buruk Sebulan Terakhir, Indeks Massa Tubuh (IMT), Jenis Kelamin, dan Usia untuk memperkirakan kemungkinan diabetes. Selalu gunakan pertimbangan klinis Anda sebelum mendiagnosis pasien.
             </p>
           </div>
         </div>

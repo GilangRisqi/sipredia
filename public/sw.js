@@ -4,11 +4,17 @@
  * Layer: PWA / Offline Support
  */
 
-const CACHE_NAME = 'sipredia-cache-v1';
+const CACHE_NAME = 'sipredia-cache-v2';
+
+// Injected by workbox-webpack-plugin InjectManifest
+const WB_MANIFEST = self.__WB_MANIFEST || [];
+const WEBPACK_ASSETS = WB_MANIFEST.map(item => item.url);
+
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
+  ...WEBPACK_ASSETS
 ];
 
 // ─── Install: Pre-cache static shell ─────────────────────────────────────────
@@ -68,6 +74,12 @@ self.addEventListener('fetch', (event) => {
         const cloned = response.clone();
         caches.open(CACHE_NAME).then((cache) => cache.put(request, cloned));
         return response;
+      }).catch((err) => {
+        // Fallback to index.html for SPA navigation when offline
+        if (request.mode === 'navigate') {
+          return caches.match('/index.html');
+        }
+        throw err;
       });
     })
   );

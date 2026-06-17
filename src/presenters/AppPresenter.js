@@ -249,6 +249,34 @@ export class AppPresenter {
     this.showToast('Berhasil keluar.', 'info');
   }
 
+  // ── PWA UI Helpers ──────────────────────────────────────────────────────────
+
+  showUpdateAvailable() {
+    let container = document.getElementById('pwa-update-container');
+    if (container) return;
+    
+    container = document.createElement('div');
+    container.id = 'pwa-update-container';
+    container.style.cssText = `
+      position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+      background: var(--color-primary); color: white; border-radius: var(--radius-md); 
+      padding: var(--space-3) var(--space-4); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2); 
+      display: flex; align-items: center; gap: var(--space-3); z-index: 1000;
+    `;
+    document.body.appendChild(container);
+
+    container.innerHTML = `
+      <div style="flex: 1;">
+        <p style="margin: 0; font-weight: 500;">Versi baru tersedia!</p>
+      </div>
+      <button id="btn-pwa-reload" class="btn btn-sm" style="background: white; color: var(--color-primary); font-weight: 600; padding: 0.25rem 0.75rem;">Muat Ulang</button>
+    `;
+
+    document.getElementById('btn-pwa-reload').addEventListener('click', () => {
+      window.location.reload();
+    });
+  }
+
   // ── Toast Notification & Loading Helpers ────────────────────────────────────
 
   showToast(message, type = 'info', durationMs = 4000) {
