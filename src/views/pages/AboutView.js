@@ -96,7 +96,7 @@ export class AboutView extends HTMLElement {
                 </tr>
                 <tr style="border-bottom: 1px solid var(--color-border);">
                   <td style="padding: var(--space-3) var(--space-2);">5</td>
-                  <td style="font-weight: 500; color: var(--color-text-primary);">Tingkat Kesehatan</td>
+                  <td style="font-weight: 500; color: var(--color-text-primary);">Tingkat Kesehatan Berdasarkan Keluhan</td>
                   <td style="padding: var(--space-3) var(--space-2);">
                     Penilaian kondisi kesehatan pasien berdasarkan tingkat keparahan keluhan, mulai dari 1 (Sangat Baik) hingga 5 (Buruk).
                     <div style="margin-top: var(--space-2);">

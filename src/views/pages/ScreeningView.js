@@ -76,19 +76,19 @@ export class ScreeningView extends HTMLElement {
             </div>
 
             <!-- 6. Tingkat Kesehatan -->
-            <div class="form-group">
-              <label class="form-label" for="input-health">Tingkat Kesehatan Fisik (Skala 1-5)</label>
+            <div class="form-group" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+              <label class="form-label" for="input-health">Tingkat Kesehatan Berdasarkan Keluhan (Skala 1-5)</label>
               <input class="form-input" type="number" id="input-health" name="generalHealth" placeholder="1 (Sangat Baik) - 5 (Buruk)" min="1" max="5" required />
             </div>
 
             <!-- 7. Jumlah Hari Sakit -->
-            <div class="form-group">
+            <div class="form-group" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
               <label class="form-label" for="input-sick">Jumlah Hari Sakit (1 Bulan Terakhir)</label>
               <input class="form-input" type="number" id="input-sick" name="sickDays" placeholder="0 - 30" min="0" max="30" required />
             </div>
 
             <!-- 8. Jenis Kelamin -->
-            <div class="form-group">
+            <div class="form-group" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
               <label class="form-label" for="input-sex">Jenis Kelamin</label>
               <select class="form-select" id="input-sex" name="sex" required>
                 <option value="" disabled selected>Pilih...</option>
