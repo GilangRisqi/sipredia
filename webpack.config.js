@@ -60,6 +60,7 @@ module.exports = {
       patterns: [
         { from: 'public/manifest.json', to: 'manifest.json' },
         { from: 'public/icons', to: 'icons' },
+        { from: 'public/_redirects', to: '_redirects' },
         ...(isDev ? [{ from: 'public/sw.js', to: 'sw.js' }] : []),
       ],
     }),
