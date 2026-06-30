@@ -19,6 +19,10 @@ export class RegisterView {
           </div>
 
           <form class="login-form" id="register-form" novalidate autocomplete="off">
+            <div style="margin-bottom: var(--space-4); padding: var(--space-3); background-color: rgba(245, 158, 11, 0.1); border: 1px solid var(--color-warning); color: var(--color-warning); border-radius: var(--radius-sm); text-align: center; font-size: var(--font-size-sm);">
+              <i class="bi bi-info-circle-fill"></i> Fitur pendaftaran saat ini sedang dinonaktifkan.
+            </div>
+
             <div class="form-group">
               <label class="form-label" for="input-nama">Nama Lengkap</label>
               <input
@@ -28,6 +32,7 @@ export class RegisterView {
                 name="nama"
                 placeholder="Masukkan nama lengkap"
                 required
+                disabled
               />
             </div>
 
@@ -39,6 +44,7 @@ export class RegisterView {
                 id="input-tgl-lahir"
                 name="tgl-lahir"
                 required
+                disabled
               />
             </div>
 
@@ -51,6 +57,7 @@ export class RegisterView {
                 name="email"
                 placeholder="Masukkan email"
                 required
+                disabled
               />
             </div>
 
@@ -64,22 +71,26 @@ export class RegisterView {
                   name="password"
                   placeholder="Masukkan password"
                   required
+                  disabled
                 />
                 <button
                   type="button"
                   class="btn-toggle-pw"
                   id="btn-toggle-pw"
                   aria-label="Tampilkan/sembunyikan password"
+                  disabled
                 ><i class="bi bi-eye"></i></button>
               </div>
             </div>
 
             <button
-              type="submit"
+              type="button"
               class="btn btn-primary btn-block"
               id="btn-register-submit"
+              disabled
+              style="opacity: 0.6; cursor: not-allowed;"
             >
-              Daftar
+              Daftar (Dinonaktifkan)
             </button>
 
             <div style="text-align: center; margin-top: var(--space-4);">

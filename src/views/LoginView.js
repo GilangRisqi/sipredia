@@ -19,6 +19,10 @@ export class LoginView {
           </div>
 
           <form class="login-form" id="login-form" novalidate autocomplete="on">
+            <div style="margin-bottom: var(--space-4); padding: var(--space-3); background-color: rgba(245, 158, 11, 0.1); border: 1px solid var(--color-warning); color: var(--color-warning); border-radius: var(--radius-sm); text-align: center; font-size: var(--font-size-sm);">
+              <i class="bi bi-info-circle-fill"></i> Fitur masuk (login) saat ini sedang dinonaktifkan.
+            </div>
+
             <div class="form-group">
               <label class="form-label" for="input-email">Email</label>
               <input
@@ -30,6 +34,7 @@ export class LoginView {
                 autocomplete="email"
                 required
                 aria-required="true"
+                disabled
               />
               <span class="form-error" id="error-email" aria-live="polite"></span>
             </div>
@@ -46,23 +51,27 @@ export class LoginView {
                   autocomplete="current-password"
                   required
                   aria-required="true"
+                  disabled
                 />
                 <button
                   type="button"
                   class="btn-toggle-pw"
                   id="btn-toggle-pw"
                   aria-label="Tampilkan/sembunyikan password"
+                  disabled
                 ><i class="bi bi-eye"></i></button>
               </div>
               <span class="form-error" id="error-password" aria-live="polite"></span>
             </div>
 
             <button
-              type="submit"
+              type="button"
               class="btn btn-primary btn-block"
               id="btn-login-submit"
+              disabled
+              style="opacity: 0.6; cursor: not-allowed;"
             >
-              Masuk
+              Masuk (Dinonaktifkan)
             </button>
 
             <div style="text-align: center; margin-top: var(--space-4);">

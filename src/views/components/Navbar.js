@@ -122,14 +122,14 @@ export class AppNavbar extends HTMLElement {
       <span class="shell-user__name">${this.#escapeHtml(user.name || user.username)}</span>
       <button class="btn btn-secondary btn-sm" id="btn-logout-desktop" aria-label="Logout">Keluar</button>
     ` : `
-      <a href="/login" class="btn btn-primary btn-sm" data-route="/login">Masuk</a>
+      <a href="/login" class="btn btn-primary btn-sm" data-route="/login" style="display: none;">Masuk</a>
     `;
 
     const renderUserMobile = user ? `
       <span class="shell-user__name" style="color: var(--color-text-secondary); margin-bottom: var(--space-2); font-weight: 500;">${this.#escapeHtml(user.name || user.username)}</span>
       <button class="btn btn-secondary btn-sm" id="btn-logout-mobile" aria-label="Logout" style="width: 100%;">Keluar</button>
     ` : `
-      <a href="/login" class="btn btn-primary btn-sm" data-route="/login" style="text-align: center;">Masuk</a>
+      <a href="/login" class="btn btn-primary btn-sm" data-route="/login" style="text-align: center; display: none;">Masuk</a>
     `;
 
     if (desktopContainer) desktopContainer.innerHTML = renderUserDesktop;
