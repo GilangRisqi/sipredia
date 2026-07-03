@@ -152,8 +152,18 @@ export class ScreeningView extends HTMLElement {
     weightInput.addEventListener('input', calculateBMI);
     heightInput.addEventListener('input', calculateBMI);
 
-    // Form Submission
+    // Form Reset
     if (form) {
+      form.addEventListener('reset', () => {
+        // Reset manual untuk teks BMI (karena div bukan elemen input standar)
+        if (bmiResult) bmiResult.textContent = '0.00';
+        
+        // Sembunyikan hasil prediksi jika sebelumnya tampil
+        const container = this.querySelector('#result-container');
+        if (container) container.hidden = true;
+      });
+
+      // Form Submission
       form.addEventListener('submit', (e) => {
         e.preventDefault();
         
