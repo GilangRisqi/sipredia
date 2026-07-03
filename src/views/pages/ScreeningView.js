@@ -27,43 +27,19 @@ export class ScreeningView extends HTMLElement {
         <form class="screening-form card" id="screening-form" style="margin-bottom: var(--space-6);" novalidate>
           <div class="form-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-5);">
             
-            <!-- 1. Riwayat Darah Tinggi -->
+            <!-- 1. Umur -->
             <div class="form-group">
-              <label class="form-label" for="input-hbp">Riwayat Darah Tinggi</label>
-              <select class="form-select" id="input-hbp" name="highBloodPressure" required>
-                <option value="" disabled selected>Pilih...</option>
-                <option value="Ya">Ya</option>
-                <option value="Tidak">Tidak</option>
-              </select>
+              <label class="form-label" for="input-age">Umur Pasien (Tahun)</label>
+              <input class="form-input" type="number" id="input-age" name="patientAge" placeholder="cth: 45" min="1" max="120" required />
             </div>
 
-            <!-- 2. Riwayat Kolesterol -->
-            <div class="form-group">
-              <label class="form-label" for="input-chol">Riwayat Kolesterol Tinggi</label>
-              <select class="form-select" id="input-chol" name="highCholesterol" required>
-                <option value="" disabled selected>Pilih...</option>
-                <option value="Ya">Ya</option>
-                <option value="Tidak">Tidak</option>
-              </select>
-            </div>
-
-            <!-- 3. Riwayat Penyakit Jantung -->
-            <div class="form-group">
-              <label class="form-label" for="input-heart">Riwayat Penyakit Jantung</label>
-              <select class="form-select" id="input-heart" name="heartDisease" required>
-                <option value="" disabled selected>Pilih...</option>
-                <option value="Ya">Ya</option>
-                <option value="Tidak">Tidak</option>
-              </select>
-            </div>
-
-            <!-- 4. Berat Badan -->
+            <!-- 2. Berat Badan -->
             <div class="form-group">
               <label class="form-label" for="input-weight">Berat Badan (kg)</label>
               <input class="form-input" type="number" id="input-weight" name="weight" placeholder="cth: 65" min="10" max="250" required />
             </div>
 
-            <!-- 5. Tinggi Badan -->
+            <!-- 3. Tinggi Badan -->
             <div class="form-group">
               <label class="form-label" for="input-height">Tinggi Badan (cm)</label>
               <input class="form-input" type="number" id="input-height" name="height" placeholder="cth: 165" min="50" max="250" required />
@@ -75,32 +51,68 @@ export class ScreeningView extends HTMLElement {
               <div id="bmi-result" style="font-size: var(--font-size-xl); font-weight: 700; color: var(--color-accent);">0.00</div>
             </div>
 
-            <!-- 6. Tingkat Kesehatan -->
-            <div class="form-group" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+            <!-- 4. Jenis Kelamin -->
+            <div class="form-group">
+              <label class="form-label">Jenis Kelamin</label>
+              <div class="form-input" style="display: flex; gap: var(--space-6); align-items: center; cursor: default; height: 100%;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin: 0; font-weight: 500;">
+                  <input type="radio" name="sex" value="Pria" required style="accent-color: var(--color-accent); width: 1.2rem; height: 1.2rem; cursor: pointer;" /> Laki-Laki
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin: 0; font-weight: 500;">
+                  <input type="radio" name="sex" value="Wanita" required style="accent-color: var(--color-accent); width: 1.2rem; height: 1.2rem; cursor: pointer;" /> Perempuan
+                </label>
+              </div>
+            </div>
+
+            <!-- 5. Riwayat Darah Tinggi -->
+            <div class="form-group">
+              <label class="form-label">Riwayat Darah Tinggi</label>
+              <div class="form-input" style="display: flex; gap: var(--space-6); align-items: center; cursor: default; height: 100%;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin: 0; font-weight: 500;">
+                  <input type="radio" name="highBloodPressure" value="Ya" required style="accent-color: var(--color-accent); width: 1.2rem; height: 1.2rem; cursor: pointer;" /> Ya
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin: 0; font-weight: 500;">
+                  <input type="radio" name="highBloodPressure" value="Tidak" required style="accent-color: var(--color-accent); width: 1.2rem; height: 1.2rem; cursor: pointer;" /> Tidak
+                </label>
+              </div>
+            </div>
+
+            <!-- 6. Riwayat Kolesterol Tinggi -->
+            <div class="form-group">
+              <label class="form-label">Riwayat Kolesterol Tinggi</label>
+              <div class="form-input" style="display: flex; gap: var(--space-6); align-items: center; cursor: default; height: 100%;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin: 0; font-weight: 500;">
+                  <input type="radio" name="highCholesterol" value="Ya" required style="accent-color: var(--color-accent); width: 1.2rem; height: 1.2rem; cursor: pointer;" /> Ya
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin: 0; font-weight: 500;">
+                  <input type="radio" name="highCholesterol" value="Tidak" required style="accent-color: var(--color-accent); width: 1.2rem; height: 1.2rem; cursor: pointer;" /> Tidak
+                </label>
+              </div>
+            </div>
+
+            <!-- 7. Riwayat Penyakit Jantung -->
+            <div class="form-group">
+              <label class="form-label">Riwayat Penyakit Jantung</label>
+              <div class="form-input" style="display: flex; gap: var(--space-6); align-items: center; cursor: default; height: 100%;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin: 0; font-weight: 500;">
+                  <input type="radio" name="heartDisease" value="Ya" required style="accent-color: var(--color-accent); width: 1.2rem; height: 1.2rem; cursor: pointer;" /> Ya
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin: 0; font-weight: 500;">
+                  <input type="radio" name="heartDisease" value="Tidak" required style="accent-color: var(--color-accent); width: 1.2rem; height: 1.2rem; cursor: pointer;" /> Tidak
+                </label>
+              </div>
+            </div>
+
+            <!-- 8. Tingkat Kesehatan -->
+            <div class="form-group" style="display: flex; flex-direction: column; height: 100%;">
               <label class="form-label" for="input-health">Tingkat Kesehatan Berdasarkan Keluhan (Skala 1-5)</label>
               <input class="form-input" type="number" id="input-health" name="generalHealth" placeholder="1 (Sangat Baik) - 5 (Buruk)" min="1" max="5" required />
             </div>
 
-            <!-- 7. Jumlah Hari Sakit -->
+            <!-- 9. Jumlah Hari Sakit -->
             <div class="form-group" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
               <label class="form-label" for="input-sick">Jumlah Hari Sakit (1 Bulan Terakhir)</label>
               <input class="form-input" type="number" id="input-sick" name="sickDays" placeholder="0 - 30" min="0" max="30" required />
-            </div>
-
-            <!-- 8. Jenis Kelamin -->
-            <div class="form-group" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
-              <label class="form-label" for="input-sex">Jenis Kelamin</label>
-              <select class="form-select" id="input-sex" name="sex" required>
-                <option value="" disabled selected>Pilih...</option>
-                <option value="Pria">Pria</option>
-                <option value="Wanita">Wanita</option>
-              </select>
-            </div>
-
-            <!-- 9. Umur -->
-            <div class="form-group">
-              <label class="form-label" for="input-age">Umur Pasien (Tahun)</label>
-              <input class="form-input" type="number" id="input-age" name="patientAge" placeholder="cth: 45" min="1" max="120" required />
             </div>
 
           </div>
