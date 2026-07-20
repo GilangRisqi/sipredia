@@ -46,7 +46,7 @@ export class DashboardView extends HTMLElement {
             <div class="hero-content">
               <span class="hero-greeting">${greeting}, ${displayName}</span>
               <h1 class="hero-title">SIPREDIA <br><span class="text-gradient">Sistem Prediksi Diabetes</span></h1>
-              <p class="hero-subtitle">Alat bantu dokter untuk deteksi dini risiko diabetes pasien secara cepat, akurat, dan berbasis kecerdasan buatan.</p>
+              <p class="hero-subtitle">Mendukung tenaga kesehatan dalam melakukan skrining awal risiko diabetes menggunakan model Machine Learning berbasis Random Forest. Hasil prediksi digunakan sebagai alat bantu dan tidak menggantikan diagnosis medis maupun pemeriksaan laboratorium.</p>
               <div class="hero-actions">
                 <button class="btn btn-primary btn-cta" data-route="/screening" aria-label="Mulai melakukan prediksi diabetes">
                   <i class="bi bi-stethoscope" style="margin-right: 0.5rem;"></i> Mulai Prediksi Baru

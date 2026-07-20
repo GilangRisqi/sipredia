@@ -30,7 +30,7 @@ export class AboutView extends HTMLElement {
             <span><i class="bi bi-bullseye"></i></span> Tujuan dan Manfaat
           </h2>
           <p class="text-secondary" style="line-height: 1.8;">
-            Aplikasi web ini bertujuan untuk mempercepat deteksi dini risiko diabetes bagi pasien di tingkat fasilitas kesehatan pertama (Puskesmas). Dengan adanya SIPREDIA, tenaga medis dapat dengan cepat mengklasifikasikan risiko pasien sebagai langkah awal sebelum melakukan rujukan atau pemeriksaan laboratorium lebih lanjut.
+            Aplikasi web ini bertujuan untuk mendukung proses skrining awal risiko diabetes di tingkat fasilitas kesehatan pertama (Puskesmas). SIPREDIA membantu tenaga kesehatan mengidentifikasi pasien yang berisiko diabetes berdasarkan faktor-faktor risiko yang tersedia pada data pasien. Hasil prediksi yang diberikan bersifat sebagai alat bantu dan tidak dimaksudkan untuk menggantikan diagnosis medis maupun pemeriksaan laboratorium.
           </p>
         </div>
 

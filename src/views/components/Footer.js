@@ -20,7 +20,7 @@ export class AppFooter extends HTMLElement {
           <div class="shell-footer__content">
             <span class="shell-footer__logo">🩺 SIPREDIA</span>
             <p class="shell-footer__clinic">
-              Layanan Penunjang Keputusan Klinis Puskesmas. Membantu dokter dalam mendeteksi secara dini risiko diabetes mellitus tipe 2 pada pasien.
+              Membantu tenaga kesehatan dalam mengidentifikasi risiko diabetes berdasarkan faktor-faktor risiko pasien.
             </p>
           </div>
           <div class="shell-footer__bottom">
