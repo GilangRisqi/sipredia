@@ -62,7 +62,7 @@ async calculateRisk(patientData) {
 
     // Lakukan pemanggilan (Fetch) ke backend Python Flask
     try {
-      const response = await fetch('https://sipredia-ml-production.up.railway.app/prediksi', {
+      const response = await fetch('https://sipredia-ml.up.railway.app/prediksi', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
