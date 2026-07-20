@@ -40,7 +40,7 @@ export class AboutView extends HTMLElement {
             <span><i class="bi bi-phone"></i></span> Cara Penggunaan PWA
           </h2>
           <p class="text-secondary" style="line-height: 1.8; margin-bottom: var(--space-3);">
-            SIPREDIA dirancang sebagai <strong>Progressive Web App (PWA)</strong>. Artinya, aplikasi ini dapat diinstal di perangkat Anda (baik desktop maupun seluler) dan memiliki kemampuan untuk berjalan meskipun tanpa koneksi internet (offline).
+            SIPREDIA dirancang sebagai <strong>Progressive Web App (PWA)</strong>. Artinya, aplikasi ini dapat diinstal di perangkat Anda (baik desktop maupun seluler).
           </p>
           <ol class="text-secondary" style="line-height: 1.8; margin-left: var(--space-5);">
             <li>Pilih menu <strong>Prediksi</strong> melalui bilah navigasi.</li>
